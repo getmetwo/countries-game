@@ -60,29 +60,26 @@ const stopBackgroundMusic = () => {
   } catch {}
 };
 
-const GAME_DURATION_MS = 5_000; // <seconds>_000
+const GAME_DURATION_MS = 60_000; // <seconds>_000
 
 function CountdownMode({ onExit, onExitFromHeader }) {
-  const [resultsPhase, setResultsPhase] = useState('idle'); 
-  // 'idle' | 'tallying' | 'done'
-  const [remainingMs, setRemainingMs] = useState(GAME_DURATION_MS);
-  const [hasFinishedSoundPlayed, setHasFinishedSoundPlayed] = useState(false);
-  const [hasTalliedThisGame, setHasTalliedThisGame] = useState(false);
-  const [currentCountry, setCurrentCountry] = useState(null);
-  const [usedCountryIds, setUsedCountryIds] = useState([]);
-  const [score, setScore] = useState(0);
+  const [resultsPhase, setResultsPhase] = useState('idle');
+const [remainingMs, setRemainingMs] = useState(GAME_DURATION_MS);
+const [hasFinishedSoundPlayed, setHasFinishedSoundPlayed] = useState(false);
+const [currentCountry, setCurrentCountry] = useState(null);
+const [usedCountryIds, setUsedCountryIds] = useState([]);
+const [score, setScore] = useState(0);
 
-  const [searchTerm, setSearchTerm] = useState('');
-  const [wrongGuessesForCurrent, setWrongGuessesForCurrent] = useState([]);
-  const [lastResult, setLastResult] = useState(null); // 'correct' | 'wrong' | 'pass' | null
-  const [resultBanner, setResultBanner] = useState(null); // 'correct' | 'wrong' | 'pass' | null
+const [searchTerm, setSearchTerm] = useState('');
+const [wrongGuessesForCurrent, setWrongGuessesForCurrent] = useState([]);
+const [resultBanner, setResultBanner] = useState(null);
 
-  const [isWorldLeader, setIsWorldLeader] = useState(false);
+const [isWorldLeader, setIsWorldLeader] = useState(false);
 const [playerName, setPlayerName] = useState('');
+  const [phase, setPhase] = useState('idle'); // 'idle' | 'precount' | 'playing' | 'finished'
+  const [shuffleCountry, setShuffleCountry] = useState(null);
+  const [precountMs, setPrecountMs] = useState(0);
 
-const [phase, setPhase] = useState('idle'); // 'idle' | 'precount' | 'playing' | 'finished'
-const [shuffleCountry, setShuffleCountry] = useState(null);
-const [precountMs, setPrecountMs] = useState(0);
 
 useEffect(() => {
 return () => {
@@ -234,14 +231,14 @@ const handleStart = () => {
     setSearchTerm('');
 
     const next = pickRandomCountry(countries, newUsed);
-        if (!next) {
-      // No more countries; end early
-      setPhase('finished');
-      if (passed) {
-        setLastResult('pass');
-      }
-      return;
-    }
+if (!next) {
+  // No more countries; end early
+  setPhase('finished');
+  if (passed) {
+    setResultBanner('pass');  // was setLastResult('pass');
+  }
+  return;
+}
 
     setCurrentCountry(next);
   };
@@ -276,7 +273,6 @@ if (countryId === currentCountry.id) {
   // Correct
   playCorrectSound();
   setScore((s) => s + 1);
-  setLastResult('correct');
   setResultBanner('correct');
   handleNextCountry(false);
 } else {
@@ -288,16 +284,15 @@ if (countryId === currentCountry.id) {
     if (newWrongs.length >= 3) {
       // Third wrong guess triggers wrong + pass
       playPassSound();
-      setLastResult('pass');
       setResultBanner('pass');
       handleNextCountry(true);
     } else {
       playWrongSound();
-      setLastResult('wrong');
       setResultBanner('wrong');
     }
   }
 }
+
 
   };
 
@@ -330,38 +325,35 @@ useEffect(() => {
 
   stopAllSounds();
   setResultsPhase('tallying');
-  setHasCheckedLeader(false);
   setIsWorldLeader(false);
   setPlayerName('');
 
   const timeoutId = setTimeout(async () => {
-  if (phase !== 'finished') return;
+    if (phase !== 'finished') return;
 
-  let madeBoard = false;
-  try {
-    madeBoard = await checkIfWorldLeader(score);  // async check against Supabase
-  } catch (e) {
-    console.error('checkIfWorldLeader failed', e);
-  }
+    let madeBoard = false;
+    try {
+      madeBoard = await checkIfWorldLeader(score);
+    } catch (e) {
+      console.error('checkIfWorldLeader failed', e);
+    }
 
-  setIsWorldLeader(madeBoard);
-  setHasCheckedLeader(true);
-  setResultsPhase('done');
+    setIsWorldLeader(madeBoard);
+    setResultsPhase('done');
 
-  if (madeBoard) {
-    playLeaderCheer();
-    setTimeout(() => {
-      if (phase !== 'finished') return;
+    if (madeBoard) {
+      playLeaderCheer();
+      setTimeout(() => {
+        if (phase !== 'finished') return;
+        playFinishSound();
+      }, 4500);
+    } else {
       playFinishSound();
-    }, 4500);
-  } else {
-    playFinishSound();
-  }
-}, 2000);
+    }
+  }, 2000);
 
   return () => clearTimeout(timeoutId);
 }, [phase, score, hasFinishedSoundPlayed]);
-
 
 
 return (

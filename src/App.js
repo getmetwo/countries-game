@@ -13,10 +13,6 @@ audio.play().catch(() => {});
 function App() {
   const [mode, setMode] = useState(null);
 
-//  const handleBackToHome = () => {
-//  setMode(null);
-//  };
-
   const handleSelectMode = (selectedMode) => {
     setMode(selectedMode);
   };
@@ -53,68 +49,6 @@ if (mode === 'countdown') {
     </div>
   );
 }
-
-/*
-if (mode === 'start') {
-  return (
-  // Start screen: choose game mode
-if (mode === 'start') {
-  return (
-    <div className="app-root mode-root-white">
-      <header className="app-header mode-header-white">
-        <button
-          className="back-button-simple"
-          onClick={() => {
-            playClick();
-            handleBackToHome();
-          }}
-        >
-          «
-        </button>
-        <h1 className="mode-title">Choose game mode</h1>
-      </header>
-
-      <main className="start-main">
-        <div className="mode-grid">
-         <section
-  className="mode-card"
-  onClick={() => handleSelectMode('countdown')}
->
-  <h2>Countdown ⏳</h2>
-  <p>Race the clock to name as many countries as you can.</p>
-  <button
-    className="mode-go-button"
-    onClick={(e) => {
-      e.stopPropagation();
-      handleSelectMode('countdown');
-    }}
-  >
-    Play »
-  </button>
-</section>
-
-
-          <section className="mode-card mode-card-disabled">
-            <h2>Sprint 👟</h2>
-            <p>First one to name twenty countries wins.</p>
-            <button className="mode-go-button" disabled>
-              Coming soon
-            </button>
-          </section>
-
-          <section className="mode-card mode-card-disabled">
-            <h2>Genius 🤓</h2>
-            <p>Name every single country. One mistake and it’s over.</p>
-            <button className="mode-go-button" disabled>
-              Coming soon
-            </button>
-          </section>
-        </div>
-      </main>
-    </div>
-  );
-}
-*/
 
 
 // Home screen
