@@ -12,7 +12,7 @@ audio.play().catch(() => {});
 
 function App() {
   const [mode, setMode] = useState(null);
-
+  console.log('App rendered on Vercel'); // TEMP
   const handleSelectMode = (selectedMode) => {
     setMode(selectedMode);
   };
