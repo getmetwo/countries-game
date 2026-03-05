@@ -13,9 +13,9 @@ audio.play().catch(() => {});
 function App() {
   const [mode, setMode] = useState(null);
 
-  const handleBackToHome = () => {
-    setMode(null);
-  };
+//  const handleBackToHome = () => {
+//  setMode(null);
+//  };
 
   const handleSelectMode = (selectedMode) => {
     setMode(selectedMode);

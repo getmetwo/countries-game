@@ -41,7 +41,6 @@ const playFinishSound    = () => playSound('happydance.mp3', 0.3);
 const playCountdownSound = () => playSound('countdown.mp3', 0.4);
 const playStartDing      = () => playSound('ding.mp3', 0.2);
 const playClickSound     = () => playSound('click.mp3', 0.3);
-const playTallySound      = () => playSound('countdown.mp3', 0.4); // reuse countdown
 const playLeaderCheer     = () => playSound('cheering.mp3', 0.4);
 
 const startBackgroundMusic = () => {
@@ -79,7 +78,6 @@ function CountdownMode({ onExit, onExitFromHeader }) {
   const [resultBanner, setResultBanner] = useState(null); // 'correct' | 'wrong' | 'pass' | null
 
   const [isWorldLeader, setIsWorldLeader] = useState(false);
-const [hasCheckedLeader, setHasCheckedLeader] = useState(false);
 const [playerName, setPlayerName] = useState('');
 
 const [phase, setPhase] = useState('idle'); // 'idle' | 'precount' | 'playing' | 'finished'
@@ -102,11 +100,6 @@ useEffect(() => {
   return () => clearTimeout(timeoutId);
 }, [resultBanner]);
 
-
-  // Precompute remaining pool (no repeats in one game)
-  const remainingCountries = useMemo(() => {
-    return countries.filter((c) => !usedCountryIds.includes(c.id));
-  }, [usedCountryIds]);
 
   // Timer
   useEffect(() => {
@@ -225,12 +218,10 @@ const handleStart = () => {
   stopAllSounds();
   setRemainingMs(GAME_DURATION_MS);
   setHasFinishedSoundPlayed(false);
-  setHasTalliedThisGame(false);   // <-- add this
   setUsedCountryIds([]);
   setScore(0);
   setSearchTerm('');
   setWrongGuessesForCurrent([]);
-  setLastResult(null);
   setPhase('precount');
 };
 
