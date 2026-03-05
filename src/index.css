@@ -1,13 +1,779 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+:root {
+  --bg: #050816;
+  --panel-bg: #111827;
+  --accent: #38bdf8;
+  --accent-soft: rgba(56, 189, 248, 0.1);
+  --text: #e5e7eb;
+  --muted: #9ca3af;
+  --danger: #f97373;
+  --success: #4ade80;
+  --pass: #facc15;
+  --border-radius: 12px;
+  --shadow-soft: 0 18px 40px rgba(0, 0, 0, 0.6);
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'SF Pro Text',
+    'Segoe UI', sans-serif;
+  background: radial-gradient(circle at top, #1f2937 0, #020617 50%, #000 100%);
+  color: var(--text);
+}
+
+.app-root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-root.home-root {
+  align-items: center;          /* center horizontally */
+  justify-content: flex-start;
+  padding: 40px 16px;
+}
+
+.app-header {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.app-header h1 {
+  font-size: 28px;
+  margin: 0;
+}
+
+h1 {
+  text-transform: none;
+}
+
+.tagline {
+  margin: 0;
+  color: var(--muted);
+}
+
+.leaderboard {
+  margin-top: 8px;
+  padding: 16px 20px;
+  border-radius: 16px;
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.leaderboard-title {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0 0 8px;
+}
+
+.leaderboard-subtitle {
+  margin: 0;
+  font-size: 14px;
+  color: #555;
+}
+
+.leaderboard-list {
+  list-style: none;
+  padding: 0;
+  margin: 8px 0 0;
+}
+
+.leaderboard-item {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  padding: 2px 0;
+  font-size: 16px;
+}
+
+.leader-rank {
+  width: 24px;
+  text-align: right;
+  font-weight: 600;
+  color: #888;
+}
+
+.leader-name {
+  flex: 1;
+}
+
+
+.back-button {
+  margin-top: 8px;
+  align-self: flex-start;
+  background: none;
+  border: none;
+  color: var(--accent);
+  cursor: pointer;
+  font-size: 14px;
+  padding: 4px 0;
+}
+
+.home-root {
+  background: #ffffff;
+  color: #000000;
+  min-height: 100vh;
+}
+
+.home-header {
+  width: 100%;
+
+  padding: 0;               /* remove extra side padding here */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #fff;
+}
+
+.home-title {
+  font-family: 'Press Start 2P', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: clamp(24px, 4vw, 40px);
+  text-transform: uppercase;
+  text-align: center;
+  color: #ccdfed;
+  text-shadow:
+    0 2px 0 #7e3ff2,
+    0 4px 0 #7e3ff2,
+    0 6px 0 #7e3ff2,
+    0 0 0px rgba(0, 0, 0, 0.6);
+  line-height: 1.2;
+  margin: 0 0 16px;  /* gives more space above subtitle */
+  letter-spacing: 0.04em;
+  font-weight: 700;
+}
+
+.home-subtitle {
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: #6d6c72;
+  margin: 0 0 12px;
+  text-align: center;
+  max-width: 260px;
+}
+
+.home-logo {
+  width: min(70vw, 680px); /* about half the viewport, capped for huge screens */
+  height: auto;
+}
+
+.home-play-button {
+  display: inline-block;
+  margin-top: 0px;
+  padding: 12px 32px;
+  border-radius: 999px;
+  border: 2px solid #ffffff;
+  background: #7e3ff2;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background-color 0.1s ease,
+    color 0.1s ease,
+    border-color 0.1s ease;
+  min-width: 220px;
+  max-width: 360px;
+  width: 33%;
+}
+
+/* Hover only when the button itself is hovered */
+.home-play-button:hover {
+  background: #7e3ff2;
+  color: #ffffff;
+  border-color: #7e3ff2;
+}
+
+.home-cta {
+  display: flex;
+  flex-direction: column;   /* stack vertically */
+  align-items: center;      /* center horizontally */
+  gap: 16px;                /* space between logo and button */
+  margin-top: 40px;         /* space between logo and subtitle */
+}
+
+.home-main.home-main-single {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 40px 16px 64px;
+}
+
+.leaderboard-home {
+  background: #ffffff;
+  border-radius: 16px;
+  border: 1px solid #dddddd;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.04);
+  padding: 20px 24px;
+}
+
+.leaderboard-home h2 {
+  margin-top: 0;
+  margin-bottom: 8px;
+  font-size: 18px;
+}
+
+.leaderboard-home p {
+  margin: 0;
+  color: #555555;
+}
+
+.leader-status-tally {
+  font-size: 16px;
+  font-weight: 500;
+  color: #6d6c72;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  animation: tally-pulse 1s ease-in-out infinite;
+}
+
+@keyframes tally-pulse {
+  0%   { opacity: 0.4; transform: scale(1); }
+  50%  { opacity: 1;   transform: scale(1.03); }
+  100% { opacity: 0.4; transform: scale(1); }
+}
+
+/* Shared white background for non-home screens */
+.mode-root-white {
+  background: #ffffff;
+  color: #000000;
+  min-height: 100vh;
+}
+
+/* Top header with back chevron */
+.mode-header-white {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* add this */
+  gap: 12px;
+  padding: 16px 16px 30px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.back-button-simple {
+  border: none;
+  background: transparent;
+  font-size: 24px;
+  line-height: 1;
+  padding: 4px 8px;
+  cursor: pointer;
+  position: absolute;
+  left: 16px;
+}
+
+.mode-header-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  text-align: center; /* center title + subline */
+}
+
+.mode-title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.mode-subtitle {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 400;
+  color: #555555;
+}
+
+/* Start screen layout */
+.start-main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 32px 16px 48px;
+}
+
+.mode-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+/* Each mode card */
+.mode-card {
+  flex: 1 1 0;
+  min-width: 260px;
+  background: #ffffff;
+  border-radius: 16px;
+  border: 1px solid #7e3ff2;
+  padding: 20px 18px 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.mode-card h2 {
+  margin: 0 0 6px;
+  font-size: 18px;
+}
+
+.mode-card {
+  flex: 1 1 0;
+  min-width: 260px;
+  background: #ffffff;
+  border-radius: 16px;
+  border: 1px solid #7e3ff2;
+  padding: 20px 18px 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer; /* makes whole card feel clickable */
+  transition:
+    box-shadow 0.1s ease,
+    transform 0.1s ease;
+}
+
+.mode-card:hover {
+  box-shadow: 0 12px 45px #3b90c7;
+  transform: translateY(-1px);
+}
+
+/* Disabled modes look slightly muted */
+.mode-card-disabled {
+  opacity: 0.5;
+}
+
+/* Pill GO button inside each card */
+.mode-go-button {
+  align-self: flex-start;
+  padding: 9px 22px;
+  border-radius: 999px;
+  border: 1px solid #7e3ff2;
+  background: #7e3ff2;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    transform 0.1s ease,
+    background-color 0.1s ease,
+    border-color 0.1s ease;
+}
+
+.mode-go-button:hover:enabled,
+.mode-card:hover .mode-go-button:enabled {
+  background: #6b21f3;
+  border-color: #6b21f3;
+  color: #ffffff
+}
+
+.mode-go-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+/* Stack mode cards on narrow screens */
+@media (max-width: 640px) {
+  .mode-grid {
+    flex-direction: column;
+  }
+}
+
+
+
+/* Countdown mode layout */
+
+/* Timer + score row inside CountdownMode */
+.mode-root .mode-header + .timer,
+.mode-root .timer {
+  /* fallback selector if needed; we’ll redefine .timer below */
+}
+
+.countdown-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 16px;
+  margin-bottom: 26px;
+}
+
+/* Label + ticker */
+.timer {
+  text-align: center;
+}
+
+.timer-label {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  font-weight: 600;
+  color: #555555;
+  margin-bottom: 10px;
+}
+
+.timer-digits {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Individual digit blocks */
+.timer-block {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 64px;
+  background: #000000;
+  color: #ffffff;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'SF Mono', monospace;
+  font-weight: 700;
+  font-size: 32px;
+  border-radius: 6px;
+}
+
+/* Colon between seconds and hundredths */
+.timer-separator {
+  font-weight: 700;
+  font-size: 32px;
+  color: #000000;
+  padding: 0 2px;
+}
+
+/* Score pill stacked under timer */
+.score-pill {
+  margin-top: 24px;
+  padding: 6px 18px;
+  border-radius: 999px;
+  border: 1px solid #f7f7f7;
+  background: #f7f7f7;
+  color: #177e89;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+
+.center-panel {
+  display: flex;
+  justify-content: center;
+  padding: 40px 0;
+}
+
+.canvas {
+  margin-top: 26px;
+  border-radius: 12px;
+  border: 1px solid #000000;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  max-width: 960px;      /* card size */
+  aspect-ratio: 4 / 3;
+  max-height: 480px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4%;           /* this is the whitespace */
+}
+
+/* Canvas during pre-count */
+.canvas-precount {
+  background: #f7f7f7;
+  box-shadow: none;
+}
+
+/* Canvas while playing */
+.canvas-with-shadow {
+  background: #ffffff;
+  /* box-shadow: 0 12px 45px #177e89; */
+}
+
+/* Canvas at game over */
+.canvas-gameover {
+  background: #f7f7f7;
+}
+
+/* Country image ABOVE scrim */
+.country-image {
+  display: block;
+  height: 100%;          /* key: fill canvas height */
+  width: auto;           /* keep aspect ratio */
+  max-width: 100%;       /* don’t overflow horizontally */
+  margin: 0 auto;
+  object-fit: contain;
+  position: relative;
+  z-index: 2;
+}
+
+/* Countdown number ABOVE image */
+.precount-number {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 80px;
+  font-weight: 800;
+  color: #ffffff;
+  z-index: 3;
+}
+
+.country-placeholder {
+  color: #000000;
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.search-panel {
+  margin-top: 30px;
+  width: 100%;
+  max-width: 960px;       /* match canvas max width */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.search-input {
+  width: 100%;
+  padding: 11px 14px;
+  border-radius: 999px;
+  border: 1px solid #ffffff;
+  font-size: 15px;
+  outline: none;
+  background: #dbeafe;
+  color: #7e3ff2;
+}
+
+.search-input::placeholder {
+  color: #3b90c7;
+}
+
+.search-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.7);
+}
+
+.options-list {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.option-button {
+  border-radius: 999px;
+  padding: 7px 16px;
+  border: 1px solid #7e3ff2;
+  background: #ffffff;
+  color: #7e3ff2;
+  font-size: 14px;
+  cursor: pointer;
+  transition:
+    transform 0.08s ease,
+    box-shadow 0.08s ease,
+    background-color 0.08s ease,
+    border-color 0.08s ease;
+}
+
+.option-button:hover {
+  border-color: #7e3ff2;
+  background: #7e3ff2;
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.option-disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.mode-header-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.mode-subtitle {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 400;
+  color: #555555;
+}
+
+.result-banner {
+  margin-top: 18px;
+  padding: 10px 16px;
+  border-radius: 999px;
+  font-weight: 700;
+  text-align: center;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 13px;
+  animation: pop-in 0.18s ease-out;
+
+  /* NEW: constrain width to match canvas */
+  max-width: 960px;      /* same as .canvas max-width */
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.result-correct {
+  background: #dcfce7;  /* soft green */
+  color: #15803d;       /* deep green */
+  box-shadow: none;
+}
+
+.result-wrong {
+  background: #fee2e2;  /* soft red */
+  color: #b91c1c;       /* deep red */
+  box-shadow: none;
+}
+
+.result-pass {
+  background: #f7f7f7; /* soft blue */
+  color: #177e89;      /* deep blue */
+  box-shadow: none;
+}
+
+.game-over-in-canvas {
+  width: 100%;
+  height: 100%;
+  padding: 24px 24px 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.game-over-in-canvas h2 {
+  margin: 0 0 8px;
+  font-size: 22px;
+}
+
+.game-over-score {
+  margin: 0 0 16px;
+  font-size: 16px;
+}
+
+.leader-status {
+  margin: 0 0 20px;
+  font-size: 22px;
+  font-weight: 700;
+  color: #177e89;
+}
+
+.leader-name-input {
+  margin-bottom: 24px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid #000000;
+  font-size: 14px;
+  width: 100%;
+  max-width: 260px;
+  text-align: center;
+}
+
+/* Pill buttons like start screen */
+.game-over-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 8px;
+}
+
+.pill-button {
+  border-radius: 999px;
+  padding: 9px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  border-width: 1px;
+  border-style: solid;
+  border-color: transparent; /* will be overridden */
+  transition:
+    background-color 0.08s ease,
+    color 0.08s ease,
+    border-color 0.08s ease;
+}
+
+/* Primary button */
+.primary-pill {
+  background: #7e3ff2;
+  color: #ffffff;
+  border-color: #ffffff;
+}
+
+.primary-pill:hover:not(:disabled) {
+  background: #7e3ff2;
+  color: #ffffff;
+  border-color: #7e3ff2; /* 1px blue border appears */
+}
+
+/* Secondary button */
+.secondary-pill {
+  background: #ffffff;
+  color: #7e3ff2;
+  border-color: #7e3ff2;
+}
+
+.secondary-pill:hover:not(:disabled) {
+  background: #ffffff;
+  color: #7e3ff2;
+  border-color: #ffffff;
+}
+
+/* Disabled state: no hover effect, muted look */
+.pill-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  border-color: #cccccc;
+}
+
+@keyframes pop-in {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+
+.game-over-panel {
+  text-align: center;
+  margin-top: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.game-over-panel h2 {
+  margin: 0;
+  font-size: 22px;
+}
+
+.game-over-panel p {
+  margin: 0 0 8px;
+  color: var(--muted);
+}
+
+.game-over-emoji {
+  font-size: 72px; /* or 96px, tweak to taste */
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+/* Responsive */
+
+@media (max-width: 900px) {
+  .home-main {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
