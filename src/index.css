@@ -654,31 +654,36 @@ h1 {
   .search-panel {
     width: 100%;
     max-width: 100%;
-    display: block;          /* stack children vertically */
-    text-align: center;      /* center the input block */
+    display: block;
   }
 
   .search-input {
-    width: 90%;              /* 90% of screen */
-    margin: 0 auto;          /* center horizontally */
+    width: 90%;
+    margin: 0 auto;
   }
 
+  /* container for pills: same 90% width, centered as a block */
   .options-list {
-    width: 90%;              /* match input width */
-    margin: 10px auto 0;  /* center the list under input */
-    padding: 0;              /* ensure no extra indents */
+    width: 90%;
+    margin: 10px auto 0;   /* centers the 90% block itself */
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start; /* pills start at the left edge of that 90% */
+    gap: 6px;
+    list-style: none;
   }
 
   .options-list li {
-    width: 100%;             /* each option row full width of 90% column */
+    margin: 0;
   }
 
   .option-button {
-    width: 100%;             /* button fills the 90% column */
+    width: auto;           /* shrink to fit text */
   }
 
   .result-banner {
-    width: 90%;           /* match search width */
+    width: 90%;
     max-width: 90%;
     margin-left: auto;
     margin-right: auto;
