@@ -586,7 +586,7 @@ h1 {
     width: auto;         /* let max constraints decide */
     height: auto;        /* override height: 100% */
     max-width: 90%;
-    max-height: 90%;     /* tighten vertical space on phones */
+    max-height: 80%;     /* tighten vertical space on phones */
   }
 }
 
