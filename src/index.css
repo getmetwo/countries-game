@@ -632,6 +632,24 @@ h1 {
   color: #7e3ff2;
 }
 
+.result-banner {
+  margin-top: 18px;
+  padding: 10px 16px;
+  border-radius: 999px;
+  font-weight: 700;
+  text-align: center;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 13px;
+  animation: pop-in 0.18s ease-out;
+
+  /* NEW: constrain width to match canvas */
+  max-width: 960px;      /* same as .canvas max-width */
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 @media (max-width: 480px) {
   .search-panel {
     width: 100%;
@@ -648,8 +666,17 @@ h1 {
   .options-list {
     width: 90%;              /* match input width */
     margin: 10px auto 0;  /* center the list under input */
+    padding: 0;              /* ensure no extra indents */
   }
-  
+
+  .options-list li {
+    width: 100%;             /* each option row full width of 90% column */
+  }
+
+  .option-button {
+    width: 100%;             /* button fills the 90% column */
+  }
+
   .result-banner {
     width: 90%;           /* match search width */
     max-width: 90%;
@@ -715,24 +742,6 @@ h1 {
   font-size: 13px;
   font-weight: 400;
   color: #555555;
-}
-
-.result-banner {
-  margin-top: 18px;
-  padding: 10px 16px;
-  border-radius: 999px;
-  font-weight: 700;
-  text-align: center;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  font-size: 13px;
-  animation: pop-in 0.18s ease-out;
-
-  /* NEW: constrain width to match canvas */
-  max-width: 960px;      /* same as .canvas max-width */
-  width: 100%;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .result-correct {
