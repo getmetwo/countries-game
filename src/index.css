@@ -632,6 +632,19 @@ h1 {
   color: #7e3ff2;
 }
 
+@media (max-width: 480px) {
+  .search-panel {
+    width: 100%;
+    max-width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .search-input {
+    width: 90%;      /* 90% of screen on phones */
+  }
+}
+
 .search-input::placeholder {
   color: #3b90c7;
 }
