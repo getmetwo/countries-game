@@ -503,12 +503,18 @@ return (
         <>
           <div className="search-panel">
             <input
-              type="text"
-              className="search-input"
-              placeholder="Start typing a country name…"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
+  type="search"
+  name="countrySearch"
+  className="search-input"
+  autoComplete="off"
+  autoCorrect="off"
+  autoCapitalize="off"
+  spellCheck="false"
+  value={searchTerm}
+  onChange={(e) => setSearchTerm(e.target.value)}
+  placeholder="Type a country name..."
+/>
+
             <ul className="options-list">
               {filteredOptions.map((option) => {
                 const isDisabled = wrongGuessesForCurrent.includes(option.id);

@@ -26,6 +26,11 @@ body {
   color: var(--text);
 }
 
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 .app-root {
   min-height: 100vh;
   display: flex;
@@ -626,7 +631,7 @@ h1 {
   padding: 11px 14px;
   border-radius: 999px;
   border: 1px solid #ffffff;
-  font-size: 15px;
+  font-size: 16px;
   outline: none;
   background: #dbeafe;
   color: #7e3ff2;
