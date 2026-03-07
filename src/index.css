@@ -582,9 +582,10 @@ h1 {
 
 @media (max-width: 480px) {
   .country-image {
+    width: 90%;        /* drive size by width */
+    height: auto;      /* let height follow */
     max-width: 90%;
     max-height: 90%;
-    height: auto;    /* let width drive size */
   }
 }
 
