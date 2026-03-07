@@ -548,6 +548,7 @@ h1 {
   .canvas {
     width: 95vw;          /* narrower than screen */
     max-width: 95vw;
+    border: none;          /* no frame on phones */
   }
 }
 
