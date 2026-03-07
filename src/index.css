@@ -650,47 +650,6 @@ h1 {
   margin-right: auto;
 }
 
-/* mobile */
-@media (max-width: 480px) {
-  .search-panel {
-    width: 100%;
-    max-width: 960px;      /* keep same card width cap */
-    margin-left: auto;     /* center the whole panel */
-    margin-right: auto;
-  }
-
-  .search-input {
-    width: 90%;
-    margin: 0 auto;        /* centers input inside panel */
-  }
-
-  .options-list {
-    width: 90%;
-    margin: 10px auto 0;   /* centers options block under input */
-    padding: 0;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    gap: 6px;
-    list-style: none;
-  }
-
-  .options-list li {
-    margin: 0;
-  }
-
-  .option-button {
-    width: auto;
-  }
-
-  .result-banner {
-    width: 90%;
-    max-width: 90%;
-    margin-left: auto;     /* center banner under canvas */
-    margin-right: auto;
-  }
-}
-
 .search-input::placeholder {
   color: #3b90c7;
 }
@@ -735,6 +694,51 @@ h1 {
   opacity: 0.4;
   cursor: not-allowed;
   box-shadow: none;
+}
+
+/* mobile */
+@media (max-width: 480px) {
+  /* keep the whole block centered under the canvas */
+  .search-panel {
+    width: 100%;
+    max-width: 960px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* input: 90% wide and centered */
+  .search-input {
+    width: 90%;
+    margin: 0 auto;
+  }
+
+  /* results: 90% wide, centered block, pills left-aligned and wrapping */
+  .options-list {
+    width: 90%;
+    margin: 10px auto 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 6px;
+    list-style: none;
+  }
+
+  .options-list li {
+    margin: 0;
+  }
+
+  .option-button {
+    width: auto;
+  }
+
+  /* result banner: same 90% width, centered */
+  .result-banner {
+    width: 90%;
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
 .mode-header-text {
