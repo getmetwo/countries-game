@@ -212,7 +212,7 @@ h1 {
 
 @media (max-width: 480px) {
   .home-main.home-main-single {
-    padding: 24px 16px 40px;   /* tighter top/bottom on phones */
+    padding: 16px 16px 16px;   /* tighter top/bottom on phones */
   }
 
   .leaderboard-home {
@@ -220,14 +220,14 @@ h1 {
     max-width: 90vw;
     margin-left: auto;
     margin-right: auto;
-    padding: 8px 16px;        /* optional: slightly smaller padding on phones */
+    padding: 12px 16px;        /* optional: slightly smaller padding on phones */
   }
 }
 
 .home-main.home-main-single {
   max-width: 720px;
   margin: 0 auto;
-  padding: 40px 16px 64px;  /* desktop / default */
+  padding: 40px 16px 40px;  /* desktop / default */
 }
 
 .leaderboard-home {
@@ -235,7 +235,7 @@ h1 {
   border-radius: 16px;
   border: 1px solid #dddddd;
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.04);
-  padding: 12px;            /* desktop padding ~ you suggested 24px */
+  padding: 8px;            /* desktop padding ~ you suggested 24px */
 }
 
 .leaderboard-home h2 {
