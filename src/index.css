@@ -650,26 +650,27 @@ h1 {
   margin-right: auto;
 }
 
+/* mobile */
 @media (max-width: 480px) {
   .search-panel {
     width: 100%;
-    max-width: 100%;
-    display: block;
+    max-width: 960px;      /* keep same card width cap */
+    margin-left: auto;     /* center the whole panel */
+    margin-right: auto;
   }
 
   .search-input {
     width: 90%;
-    margin: 0 auto;
+    margin: 0 auto;        /* centers input inside panel */
   }
 
-  /* container for pills: same 90% width, centered as a block */
   .options-list {
     width: 90%;
-    margin: 10px auto 0;   /* centers the 90% block itself */
+    margin: 10px auto 0;   /* centers options block under input */
     padding: 0;
     display: flex;
     flex-wrap: wrap;
-    justify-content: flex-start; /* pills start at the left edge of that 90% */
+    justify-content: flex-start;
     gap: 6px;
     list-style: none;
   }
@@ -679,13 +680,13 @@ h1 {
   }
 
   .option-button {
-    width: auto;           /* shrink to fit text */
+    width: auto;
   }
 
   .result-banner {
     width: 90%;
     max-width: 90%;
-    margin-left: auto;
+    margin-left: auto;     /* center banner under canvas */
     margin-right: auto;
   }
 }
