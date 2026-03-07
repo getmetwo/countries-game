@@ -220,7 +220,7 @@ h1 {
     max-width: 90vw;
     margin-left: auto;
     margin-right: auto;
-    padding: 20px 16px;        /* optional: slightly smaller padding on phones */
+    padding: 8px 16px;        /* optional: slightly smaller padding on phones */
   }
 }
 
@@ -235,7 +235,7 @@ h1 {
   border-radius: 16px;
   border: 1px solid #dddddd;
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.04);
-  padding: 24px;            /* desktop padding ~ you suggested 24px */
+  padding: 12px;            /* desktop padding ~ you suggested 24px */
 }
 
 .leaderboard-home h2 {
