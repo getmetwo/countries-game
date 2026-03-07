@@ -301,7 +301,7 @@ h1 {
   }
 
   .countdown-header {
-    margin-top: 8px;       /* was 16px */
+    margin-top: 4px;       /* was 16px */
     margin-bottom: 26px;   /* was 26px */
   }
 }
@@ -578,6 +578,14 @@ h1 {
   object-fit: contain;
   position: relative;
   z-index: 2;
+}
+
+@media (max-width: 480px) {
+  .country-image {
+    max-width: 90%;
+    max-height: 90%;
+    height: auto;    /* let width drive size */
+  }
 }
 
 /* Countdown number ABOVE image */
