@@ -548,7 +548,7 @@ h1 {
   .canvas {
     width: 95vw;
     max-width: 95vw;
-    height: 60vh;        /* fixed height box on phones */
+    height: 45vh;        /* fixed height box on phones */
     max-height: 60vh;
     border: none;
   }
