@@ -56,6 +56,7 @@ body {
     font-size: 20px;           /* smaller on very small screens */
     max-width: 90vw;           /* cap width to ~90% of screen */
     margin: 0 auto 12px;       /* center and keep some spacing */
+    line-height: 1.35;   /* slightly more space between lines on phones */
   }
 
   .home-subtitle {
@@ -548,7 +549,7 @@ h1 {
   .canvas {
     width: 95vw;
     max-width: 95vw;
-    height: 45vh;        /* fixed height box on phones */
+    height: 35vh;        /* fixed height box on phones */
     max-height: 60vh;
     border: none;
   }
