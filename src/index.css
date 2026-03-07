@@ -283,7 +283,7 @@ h1 {
 
 @media (max-width: 480px) {
   .mode-header-white {
-    padding-top: 24px;      /* more top space for button */
+    padding-top: 12px;      /* more top space for button */
     padding-bottom: 20px;
   }
 
@@ -298,6 +298,11 @@ h1 {
 
   .mode-subtitle {
     font-size: 12px;
+  }
+
+  .countdown-header {
+    margin-top: 8px;       /* was 16px */
+    margin-bottom: 26px;   /* was 26px */
   }
 }
 

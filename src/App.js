@@ -35,7 +35,7 @@ if (mode === 'countdown') {
         <div className="mode-header-text">
           <h1 className="mode-title">⏳</h1>
           <p className="mode-subtitle">
-            Name as many countries as you can (3 wrong guesses = pass)
+            Name as many countries as you can<br />(3 wrong guesses = pass)
           </p>
         </div>
       </header>
