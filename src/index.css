@@ -546,9 +546,11 @@ h1 {
 
 @media (max-width: 480px) {
   .canvas {
-    width: 95vw;          /* narrower than screen */
+    width: 95vw;
     max-width: 95vw;
-    border: none;          /* no frame on phones */
+    height: 60vh;        /* fixed height box on phones */
+    max-height: 60vh;
+    border: none;
   }
 }
 
@@ -584,10 +586,10 @@ h1 {
 /* Mobile override */
 @media (max-width: 480px) {
   .country-image {
-    width: auto;         /* let max constraints decide */
     height: auto;        /* override height: 100% */
-    max-width: 90%;
-    max-height: 80%;     /* tighten vertical space on phones */
+    width: auto;         /* don't force width either */
+    max-width: 90%;      /* side padding */
+    max-height: 90%;     /* top/bottom padding relative to canvas height */
   }
 }
 
