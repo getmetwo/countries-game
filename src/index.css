@@ -647,6 +647,12 @@ h1 {
 
   .options-list {
     width: 90%;              /* match input width */
+    margin: 10px auto 0;  /* center the list under input */
+  }
+  
+  .result-banner {
+    width: 90%;           /* match search width */
+    max-width: 90%;
     margin-left: auto;
     margin-right: auto;
   }
