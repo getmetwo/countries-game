@@ -636,12 +636,19 @@ h1 {
   .search-panel {
     width: 100%;
     max-width: 100%;
-    display: flex;
-    justify-content: center;
+    display: block;          /* stack children vertically */
+    text-align: center;      /* center the input block */
   }
 
   .search-input {
-    width: 90%;      /* 90% of screen on phones */
+    width: 90%;              /* 90% of screen */
+    margin: 0 auto;          /* center horizontally */
+  }
+
+  .options-list {
+    width: 90%;              /* match input width */
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 
