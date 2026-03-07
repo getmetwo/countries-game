@@ -216,7 +216,7 @@ h1 {
   }
 
   .leaderboard-home {
-    margin-top: 16px;          /* pull it closer to Play button */
+    margin-top: 8px;          /* pull it closer to Play button */
     max-width: 90vw;           /* align with title/logo width */
     margin-left: auto;
     margin-right: auto;
