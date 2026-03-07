@@ -580,12 +580,13 @@ h1 {
   z-index: 2;
 }
 
+/* Mobile override */
 @media (max-width: 480px) {
   .country-image {
-    width: 90%;        /* drive size by width */
-    height: auto;      /* let height follow */
+    width: auto;         /* let max constraints decide */
+    height: auto;        /* override height: 100% */
     max-width: 90%;
-    max-height: 90%;
+    max-height: 90%;     /* tighten vertical space on phones */
   }
 }
 
