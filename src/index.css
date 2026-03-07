@@ -281,6 +281,26 @@ h1 {
   border-bottom: 1px solid #e5e7eb;
 }
 
+@media (max-width: 480px) {
+  .mode-header-white {
+    padding-top: 24px;      /* more top space for button */
+    padding-bottom: 20px;
+  }
+
+  .back-button-simple {
+    top: 8px;               /* nudge it up a bit */
+    font-size: 20px;        /* slightly smaller chevron */
+  }
+
+  .mode-title {
+    font-size: 18px;        /* shrink header text a bit */
+  }
+
+  .mode-subtitle {
+    font-size: 12px;
+  }
+}
+
 .back-button-simple {
   border: none;
   background: transparent;
@@ -466,6 +486,22 @@ h1 {
   padding: 0 2px;
 }
 
+@media (max-width: 480px) {
+  .timer-block {
+    width: 30px;
+    height: 44px;
+    font-size: 22px;
+  }
+
+  .timer-separator {
+    font-size: 22px;
+  }
+
+  .score-pill {
+    margin-top: 16px;   /* pull score closer to timer */
+  }
+}
+
 /* Score pill stacked under timer */
 .score-pill {
   margin-top: 24px;
@@ -501,6 +537,13 @@ h1 {
   align-items: center;
   justify-content: center;
   padding: 4%;           /* this is the whitespace */
+}
+
+@media (max-width: 480px) {
+  .canvas {
+    width: 95vw;          /* narrower than screen */
+    max-width: 95vw;
+  }
 }
 
 /* Canvas during pre-count */
