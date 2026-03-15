@@ -819,10 +819,30 @@ h1 {
 /* Make the \"World Leader\" controls stack nicely */
 .game-over-buttons {
   display: flex;
-  flex-direction: column;   /* stack items vertically */
-  align-items: center;      /* center input and button */
-  gap: 8px;                 /* space between name and button */
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
   margin-top: 8px;
+}
+
+/* Stack just the name and submit vertically */
+.leader-entry-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+/* keep the name pill centered and not too wide */
+.leader-name-input {
+  margin-bottom: 0;        /* gap handled by .leader-entry-block now */
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid #000000;
+  font-size: 14px;
+  width: 100%;
+  max-width: 260px;
+  text-align: center;
 }
 
 .pill-button {
