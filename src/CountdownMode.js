@@ -331,12 +331,14 @@ useEffect(() => {
   const timeoutId = setTimeout(async () => {
     if (phase !== 'finished') return;
 
-    let madeBoard = false;
+    let result = { isLeader: false, leaders: [] };
     try {
-      madeBoard = await checkIfWorldLeader(score);
+      result = await checkIfWorldLeader(score);
     } catch (e) {
       console.error('checkIfWorldLeader failed', e);
     }
+
+    const madeBoard = !!result.isLeader;
 
     setIsWorldLeader(madeBoard);
     setResultsPhase('done');
@@ -354,7 +356,6 @@ useEffect(() => {
 
   return () => clearTimeout(timeoutId);
 }, [phase, score, hasFinishedSoundPlayed]);
-
 
 return (
   <div className="mode-root">
