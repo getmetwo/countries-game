@@ -373,151 +373,161 @@ return (
           <span className="timer-block">{hundredths[1]}</span>
         </div>
       </div>
-      <div className="score-pill">
-        Score: {score}
-      </div>
+      <div className="score-pill">Score: {score}</div>
     </header>
 
     <div className="countdown-layout">
-      <div className={`canvas ${canvasStateClass}`}>
-        {phase === 'precount' && shuffleCountry && shuffleCountry.svgPath && (
-          <img
-            src={shuffleCountry.svgPath}
-            alt={shuffleCountry.name}
-            className="country-image"
-          />
-        )}
-
-        {phase === 'precount' && (
-          <>
-            <div className="precount-overlay" />
-            <span className="precount-number">
-              {precountNumber ?? 3}
-            </span>
-          </>
-        )}
-
-        {!isGameOver && phase === 'playing' && currentCountry && (
-          currentCountry.svgPath ? (
-            <img
-              src={currentCountry.svgPath}
-              alt={currentCountry.name}
-              className="country-image"
-            />
-          ) : (
-            <div className="country-placeholder">
-              {currentCountry.name}
-            </div>
-          )
-        )}
-
-        {isGameOver && (
-  <div className="game-over-in-canvas">
-    {resultsPhase === 'tallying' && (
-       <>
-        <div className="game-over-emoji">⏳</div>
-        <p className="leader-status-tally">Checking score…</p>
-      </>
-    )}
-
-    {resultsPhase === 'done' && (
-      <>
-        <div className="game-over-emoji">
-          {isWorldLeader ? "🏆" : "🤷‍♀️"}
-        </div>
-
-        <p className="leader-status">
-          {isWorldLeader
-            ? "Congratulations! You're a World Leader — enter your name:"
-            : "Sorry, you didn't make World Leader"}
-        </p>
-
-        <div className="game-over-buttons">
-          {!isWorldLeader && (
-            <>
-              <button
-                className="pill-button secondary-pill"
-                onClick={() => {
-                  stopAllSounds();
-                  playClickSound();
-                  onExit();
-                }}
-              >
-                « Exit
-              </button>
-              <button
-                className="pill-button primary-pill"
-                onClick={() => {
-                  stopAllSounds();
-                  playClickSound();
-                  handleStart();
-                }}
-              >
-                Play again »
-              </button>
-            </>
-          )}
-
-          {isWorldLeader && (
-            <>
-              <input
-                type="text"
-                className="leader-name-input"
-                placeholder="Your Name"
-                value={playerName}
-                maxLength={15}
-                onChange={(e) => setPlayerName(e.target.value)}
+      {/* Canvas only when not game over */}
+      {!isGameOver && (
+        <div className={`canvas ${canvasStateClass}`}>
+          {phase === 'precount' &&
+            shuffleCountry &&
+            shuffleCountry.svgPath && (
+              <img
+                src={shuffleCountry.svgPath}
+                alt={shuffleCountry.name}
+                className="country-image"
               />
+            )}
 
-              <button
-                className="pill-button primary-pill"
-                onClick={async () => {
-                  stopAllSounds();
-                  playClickSound();
+          {phase === 'precount' && (
+            <>
+              <div className="precount-overlay" />
+              <span className="precount-number">
+                {precountNumber ?? 3}
+              </span>
+            </>
+          )}
 
-                  try {
-                    await submitLeader(playerName.trim(), score);
-                  } catch (e) {
-                    console.error('submitLeader failed', e);
-                  }
+          {phase === 'playing' &&
+            currentCountry &&
+            (currentCountry.svgPath ? (
+              <img
+                src={currentCountry.svgPath}
+                alt={currentCountry.name}
+                className="country-image"
+              />
+            ) : (
+              <div className="country-placeholder">
+                {currentCountry.name}
+              </div>
+            ))}
+        </div>
+      )}
 
-                  onExit('start');
-                }}
-                disabled={!playerName.trim()}
-              >
-                Submit »
-              </button>
+      {/* Game over block OUTSIDE canvas */}
+      {isGameOver && (
+        <div className="game-over-panel">
+          {resultsPhase === 'tallying' && (
+            <>
+              <div className="game-over-emoji">⏳</div>
+              <p className="leader-status-tally">Checking score…</p>
+            </>
+          )}
+
+          {resultsPhase === 'done' && (
+            <>
+              <div className="game-over-emoji">
+                {isWorldLeader ? '🏆' : '🤷‍♀️'}
+              </div>
+
+              <p className="leader-status">
+                {isWorldLeader
+                  ? "Congratulations! You're a World Leader — enter your name:"
+                  : "Sorry, you didn't make World Leader"}
+              </p>
+
+              <div className="game-over-buttons">
+                {!isWorldLeader && (
+                  <>
+                    <button
+                      className="pill-button secondary-pill"
+                      onClick={() => {
+                        stopAllSounds();
+                        playClickSound();
+                        onExit();
+                      }}
+                    >
+                      « Exit
+                    </button>
+                    <button
+                      className="pill-button primary-pill"
+                      onClick={() => {
+                        stopAllSounds();
+                        playClickSound();
+                        handleStart();
+                      }}
+                    >
+                      Play again »
+                    </button>
+                  </>
+                )}
+
+                {isWorldLeader && (
+                  <>
+                    <input
+                      type="text"
+                      className="leader-name-input"
+                      placeholder="Your Name"
+                      value={playerName}
+                      maxLength={15}
+                      onChange={(e) =>
+                        setPlayerName(e.target.value)
+                      }
+                    />
+
+                    <button
+                      className="pill-button primary-pill"
+                      onClick={async () => {
+                        stopAllSounds();
+                        playClickSound();
+
+                        try {
+                          await submitLeader(
+                            playerName.trim(),
+                            score
+                          );
+                        } catch (e) {
+                          console.error(
+                            'submitLeader failed',
+                            e
+                          );
+                        }
+
+                        onExit('start');
+                      }}
+                      disabled={!playerName.trim()}
+                    >
+                      Submit »
+                    </button>
+                  </>
+                )}
+              </div>
             </>
           )}
         </div>
-      </>
-    )}
-  </div>
-)}
-
-
-      </div>
+      )}
 
       {/* search panel + result banner stay below here */}
       {phase === 'playing' && (
         <>
           <div className="search-panel">
             <input
-  type="search"
-  name="countrySearch"
-  className="search-input"
-  autoComplete="off"
-  autoCorrect="off"
-  autoCapitalize="off"
-  spellCheck="false"
-  value={searchTerm}
-  onChange={(e) => setSearchTerm(e.target.value)}
-  placeholder="Type a country name..."
-/>
-
+              type="search"
+              name="countrySearch"
+              className="search-input"
+              autoComplete="off"
+              autoCorrect="off"
+              autoCapitalize="off"
+              spellCheck="false"
+              placeholder="Start typing a country name…"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
             <ul className="options-list">
               {filteredOptions.map((option) => {
-                const isDisabled = wrongGuessesForCurrent.includes(option.id);
+                const isDisabled =
+                  wrongGuessesForCurrent.includes(option.id);
                 return (
                   <li key={option.id}>
                     <button
@@ -539,18 +549,18 @@ return (
           </div>
 
           {resultBanner && (
-  <div className={`result-banner result-${resultBanner}`}>
-    {resultBanner === 'correct' && 'CORRECT!'}
-    {resultBanner === 'wrong' && 'WRONG!'}
-    {resultBanner === 'pass' && 'PASS'}
-  </div>
-)}
-
+            <div className={`result-banner result-${resultBanner}`}>
+              {resultBanner === 'correct' && 'CORRECT!'}
+              {resultBanner === 'wrong' && 'WRONG!'}
+              {resultBanner === 'pass' && 'PASS'}
+            </div>
+          )}
         </>
       )}
     </div>
   </div>
 );
+
 
 }
 
