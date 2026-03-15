@@ -806,7 +806,7 @@ h1 {
 }
 
 .leader-name-input {
-  margin-bottom: 24px;
+  margin-bottom: 12px;      /* slightly tighter gap above button */
   padding: 8px 14px;
   border-radius: 999px;
   border: 1px solid #000000;
@@ -816,12 +816,12 @@ h1 {
   text-align: center;
 }
 
-/* Pill buttons like start screen */
+/* Make the \"World Leader\" controls stack nicely */
 .game-over-buttons {
   display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  justify-content: center;
+  flex-direction: column;   /* stack items vertically */
+  align-items: center;      /* center input and button */
+  gap: 8px;                 /* space between name and button */
   margin-top: 8px;
 }
 
@@ -833,7 +833,7 @@ h1 {
   cursor: pointer;
   border-width: 1px;
   border-style: solid;
-  border-color: transparent; /* will be overridden */
+  border-color: transparent;
   transition:
     background-color 0.08s ease,
     color 0.08s ease,
